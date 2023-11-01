@@ -1,0 +1,19 @@
+
+<div class="container text-center">
+  <h2 appTitle class="text-center">Listado de alumnos</h2>
+  <app-students-table
+  [dataSource]="students"
+  (editStudent)="onEditStudent($event)"
+  (deleteStudent)="onDeleteStudent($event)"
+></app-students-table>
+<router-outlet></router-outlet>
+  <button
+    class="mt-4"
+    (click)="openStudentsDialog()"
+    mat-raised-button
+    color="accent"
+  >
+    Agregar alumno
+  </button>
+ 
+</div>

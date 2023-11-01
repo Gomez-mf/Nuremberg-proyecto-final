@@ -1,0 +1,21 @@
+<mat-card class="example-card" *ngFor="let data of dataSource">
+  <mat-card-header>
+    <mat-card-title>{{ data.name }}</mat-card-title>
+    <mat-card-subtitle>Duración: {{ data.duration }}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      {{ data.description }}<br />
+      <br />
+      Precio: {{ data.price }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button (click)="editCourse.emit(data.id)" mat-icon-button color="primary">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button (click)="deleteCourse.emit(data.id)" mat-icon-button color="warn">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

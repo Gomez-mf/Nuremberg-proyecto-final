@@ -1,0 +1,11 @@
+<div class="container">
+  <h2 appTitle class="tex-center">Cursos</h2>
+    <app-courses-table
+    [dataSource]="(courses$ | async) || []"
+    (editCourse)="onEditCourse($event)"
+    (deleteCourse)="onDeleteCourse($event)"
+    
+    ></app-courses-table>
+  <button  mat-raised-button
+  color="accent" class="mb-5" (click)="addCourse()">Agregar curso</button>
+</div>
