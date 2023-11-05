@@ -15,10 +15,10 @@ import { StudentsComponent } from './pages/students/students.component';
 import { StudentsDialogComponent } from './pages/students/components/students-dialog/students-dialog.component';
 import { StudentsTableComponent } from './pages/students/components/students-table/students-table.component';
 import { StudentsModule} from './pages/students/students.module';
-import { RouterModule } from '@angular/router';
 import { CoursesTableComponent } from './pages/courses/components/courses-table/courses-table.component';
 import { CoursesComponent } from './pages/courses/courses.component';
 import { CoursesDialogComponent } from './pages/courses/components/courses-dialog/courses-dialog.component';
+import { DashboardRoutingModule } from './dashboard-routing.module';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { CoursesDialogComponent } from './pages/courses/components/courses-dialo
     MatInputModule,
     MatDialogModule,
     StudentsModule,
-    RouterModule
+    DashboardRoutingModule
   ],
   exports: [
     DashboardComponent

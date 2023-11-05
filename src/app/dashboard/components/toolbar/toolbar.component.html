@@ -9,11 +9,5 @@
   </button>
   <span>Nuremberg</span>
   <span class="example-spacer"></span>
-  <button
-    mat-icon-button
-    class="example-icon favorite-icon"
-    aria-label="Example icon-button with heart icon"
-  >
-    <mat-icon style="font-size: 28x">account_circle</mat-icon>
-  </button>
+  <button (click)="logout()" mat-raised-button color="accent">Cerrar Sesion</button>
 </mat-toolbar>

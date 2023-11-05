@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { coursesService } from './coursesService';
 import { Observable} from 'rxjs'
 import { course } from './models';
-import { MatDialog } from '@angular/material/dialog';
 import { CoursesDialogComponent } from './components/courses-dialog/courses-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-courses',

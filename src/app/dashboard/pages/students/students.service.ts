@@ -7,9 +7,6 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class StudentsService {
-  constructor(@Inject(apiUrl) private url: apiUrlConfig) {
-    console.log('LA URL INYECTADA ES :', url);
-  }
 
   private students: Student[] = [
     {

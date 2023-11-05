@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "user",
+      "lastname": "admin",
+      "email": "admin@nuremberg.com",
+      "password": "1234",
+      "token": "bkdbdbsjdk",
+      "role": "ADMIN"
+    }
+  ],
+  "courses": []
+}
