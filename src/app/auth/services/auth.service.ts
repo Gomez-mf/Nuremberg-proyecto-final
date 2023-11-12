@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, map } from 'rxjs';
 import { users } from 'src/app/dashboard/pages/users/models';
-import { enviroments } from 'src/enviroments/enviroments.local';
+import { environment } from 'src/enviroments/enviroments.local';
 import { LoginPayload } from '../models';
 import { Router } from '@angular/router';
 import swal from'sweetalert2';
@@ -19,7 +19,7 @@ export class AuthService {
   login(paylod: LoginPayload): void {
     this.httpClient
       .get<users[]>(
-        `${enviroments.baseUrl}/users?email=${paylod.email}&password=${paylod.password}`
+        `${environment.baseUrl}/users?email=${paylod.email}&password=${paylod.password}`
       )
       .subscribe({
         next: (r) => {
@@ -33,13 +33,16 @@ export class AuthService {
             console.log('ok');
           }
         },
+        error: (err) => {
+          alert('Error de conexion');
+        },
       });
   }
 
   verifyToken(): Observable<boolean> {
     return this.httpClient
       .get<users[]>(
-        `${enviroments.baseUrl}/users?token=${localStorage.getItem('token')}`
+        `${environment.baseUrl}/users?token=${localStorage.getItem('token')}`
       )
       .pipe(
         map((users) => {

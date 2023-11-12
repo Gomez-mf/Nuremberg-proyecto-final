@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StudentsDialogComponent } from './components/students-dialog/students-dialog.component';
-import { Subscriber } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Student } from './models';
 import { StudentsService } from './students.service';
 
@@ -14,39 +14,28 @@ import { StudentsService } from './students.service';
 })
 export class StudentsComponent {
 
-  students: Student[] = [];
+  students$: Observable<Student[]>;
   
   constructor(
     private matDialog: MatDialog,
     private studentsService: StudentsService
   ) {
-    this.studentsService.loadStudents()
-     this.studentsService.getStudents().subscribe({
-      next: (v)=>{
-        this.students = v
-      }
-     })
+    this.students$ = this.studentsService.getStudents();
   }
 
-  openStudentsDialog(): void {
+  addStudent(): void {
     this.matDialog
       .open(StudentsDialogComponent)
       .afterClosed()
       .subscribe({
         next: (v) => {
-          console.log('valor', v);
           if (!!v) {
-            this.students = [
-              ...this.students,
-              {
-                ...v,
-                id: new Date().getTime(),
-              },
-            ];
+            this.students$ = this.studentsService.createStudent(v)
           }
         },
       });
   }
+
   onEditStudent(Student: Student): void {
     this.matDialog
       .open(StudentsDialogComponent, {
@@ -56,21 +45,13 @@ export class StudentsComponent {
       .subscribe({
         next: (v) => {
           if (!!v) {
-            const newStudent = [...this.students];
-
-            const indextToEdit = newStudent.findIndex(
-              (s) => s.id === Student.id
-            );
-
-            newStudent[indextToEdit] = { ...newStudent[indextToEdit], ...v };
-
-            this.students = [...newStudent];
+            this.students$ = this.studentsService.updateStudent(Student.id, v)
           }
         },
       });
   }
 
-  onDeleteStudent(studentId: number): void {
-    this.students = this.students.filter((s) => s.id !== studentId);
+  onDeleteStudent(studentId: number): void{
+    this.students$ = this.studentsService.deleteStudent(studentId)
   }
 }
