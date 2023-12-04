@@ -1,5 +1,4 @@
 <h1 appTitle mat-card-title class="text-center">
-  {{ isEditing ? "Editando curso" : "Agregar Curso" }}
 </h1>
 <div mat-dialog-content class="container">
   <form class="row" [formGroup]="courseForm">
@@ -42,6 +41,6 @@
   </form>
 </div>
 <div mat-dialog-actions>
-  <button mat-raised-button color="accent"  (click)="onSubmit()">Confirmar</button>
+  <button mat-raised-button color="accent" (click)="onSubmit()" >Confirmar</button>
   <button mat-raised-button color="accent"  mat-dialog-close="">Cancelar</button>
 </div>

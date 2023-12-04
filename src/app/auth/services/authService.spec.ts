@@ -9,14 +9,16 @@ import { users } from 'src/app/dashboard/pages/users/models';
 import { environment } from 'src/enviroments/enviroments.local';
 import { MockProvider } from 'ng-mocks';
 import { Router } from '@angular/router';
+import { StoreModule } from '@ngrx/store';
+import { appReducer } from 'src/app/store';
 
-fdescribe('AuthService', () => {
+describe('AuthService', () => {
   let authService: AuthService;
   let httpController: HttpTestingController;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, RouterTestingModule],
+      imports: [HttpClientTestingModule, RouterTestingModule, StoreModule.forRoot(appReducer, {})],
       providers: [MockProvider(Router)],
     });
 
@@ -36,6 +38,7 @@ fdescribe('AuthService', () => {
       token: 'chiquiaskds',
       name: 'prueba',
       lastname: 'admin',
+      role: 'Admin'
     };
     authService.login({
       email: userMock.email,

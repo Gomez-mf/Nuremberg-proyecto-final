@@ -1,15 +1,12 @@
 <mat-nav-list>
   <mat-list-item>
-    <a>Bienvenido {{(authUser$ | async)?.name}}</a>
-  </mat-list-item>
-  <mat-list-item>
     <a routerLink="home"><mat-icon>home</mat-icon> Inicio</a>
   </mat-list-item>
   <mat-list-item>
     <a routerLink="students"><mat-icon>school</mat-icon> Alumnos</a>
   </mat-list-item>
-  <mat-list-item>
-    <a routerLink="teachers"><mat-icon>school</mat-icon> Profesores</a>
+  <mat-list-item *ngIf="(userRole$ | async) !== 'Student'">
+    <a routerLink="users"><mat-icon>school</mat-icon> Usuarios</a>
   </mat-list-item>
   <mat-list-item>
     <a routerLink="courses"><mat-icon>view_comfy_alt</mat-icon> Cursos</a>

@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Student } from '../../models';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { selectAuthUser } from 'src/app/store/auth/auth.selectors';
+import { map, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-students-table',
@@ -19,7 +22,12 @@ export class StudentsTableComponent {
   @Output()
   editStudent = new EventEmitter<Student>();
 
-  constructor(private router: Router) {}
+  userRole$: Observable<'Admin' | 'Student' | undefined>
+  
+
+  constructor(private router: Router, private store: Store) {
+    this.userRole$ = this.store.select(selectAuthUser).pipe(map((u)=>u?.role))
+  }
 
   goToDetail(studentId: number): void {
     this.router.navigate(['dashboard', 'students', 'detail', studentId]);

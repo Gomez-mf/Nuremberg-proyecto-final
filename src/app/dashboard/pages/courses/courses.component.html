@@ -1,11 +1,11 @@
-<div class="container">
-  <h2 appTitle class="tex-center">Cursos</h2>
+<div class="container" >
+  <h2 appTitle class="text-center">Cursos</h2>
     <app-courses-table
+    class="contenedorCard mb-4"
     [dataSource]="(courses$ | async) || []"
-    (editCourse)="onEditCourse($event)"
-    (deleteCourse)="onDeleteCourse($event)"
-    
+    (editCourse)="editCourse($event)"
+    (deleteCourse)="deleteCourse($event)"
     ></app-courses-table>
-  <button  mat-raised-button
-  color="accent" class="mb-5" (click)="addCourse()">Agregar curso</button>
+  <button class="text-center"  mat-raised-button
+  color="accent" class="mb-5" (click)="addCourse()" *ngIf="(userRole$ | async) !== 'Student'" >Agregar curso</button>
 </div>

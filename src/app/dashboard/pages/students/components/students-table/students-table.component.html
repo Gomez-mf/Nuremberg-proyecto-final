@@ -16,11 +16,9 @@
 
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef>Acciones</th>
-    <td mat-cell *matCellDef="let student">
-      <button (click)="goToDetail(student.id)" mat-icon-button color="accent">
-        <mat-icon>visibility</mat-icon>
-      </button>
+    <td mat-cell *matCellDef="let student" >
       <button
+      *ngIf="(userRole$ | async) !== 'Student'"
         (click)="editStudent.emit(student)"
         mat-icon-button
         color="primary"
@@ -28,12 +26,15 @@
         <mat-icon>edit</mat-icon>
       </button>
       <button
+      *ngIf="(userRole$ | async) !== 'Student'"
         (click)="deleteStudent.emit(student.id)"
         mat-icon-button
         color="warn"
       >
         <mat-icon>delete</mat-icon>
       </button>
+      <button *ngIf="(userRole$ | async) !== 'Admin'" mat-raised-button color="accent" routerLink='/dashboard/enrollments'>Ver inscripciones</button>
+
     </td>
   </ng-container>
 

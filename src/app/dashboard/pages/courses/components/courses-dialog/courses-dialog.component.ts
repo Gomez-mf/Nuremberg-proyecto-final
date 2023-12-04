@@ -1,7 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { coursesService } from '../../coursesService';
+import { coursesService } from '../../courses.service';
+import { course } from '../../models';
 
 @Component({
   selector: 'app-courses-dialog',
@@ -9,9 +10,11 @@ import { coursesService } from '../../coursesService';
   styleUrls: ['./courses-dialog.component.css'],
 })
 export class CoursesDialogComponent {
+
+
   nameControl = new FormControl('',[Validators.required, Validators.maxLength(20)]);
   descriptionControl = new FormControl('', Validators.required);
-  durationsControl = new FormControl('', [Validators.required, Validators.maxLength(8)]);
+  durationsControl = new FormControl('', [Validators.required, Validators.maxLength(10)]);
   priceControl = new FormControl('',[Validators.required, Validators.maxLength(8)]);
 
   courseForm = new FormGroup({
@@ -25,30 +28,20 @@ export class CoursesDialogComponent {
   constructor(
     private matDialogRef: MatDialogRef<CoursesDialogComponent>,
     private courseService: coursesService,
-    @Inject(MAT_DIALOG_DATA) private courseId?: number
+    @Inject(MAT_DIALOG_DATA) public course: course
   ) {
 
-
-    if (courseId) {
-      this.courseService.getCourseById$(courseId).subscribe({
-        next: (c) => {
-          if (c) {
-            this.courseForm.patchValue(c);
-          }
-        },
-      });
+    if (this.course) {
+      this.courseForm.patchValue(this.course);
     }
-  }
 
-  public get isEditing(): boolean {
-    return !!this.courseId;
-  }
+}
 
-  onSubmit(): void {
-    if (this.courseForm.invalid) {
-      return this.courseForm.markAllAsTouched();
-    } else {
-      this.matDialogRef.close(this.courseForm.value);
-    }
+onSubmit(): void {
+  if (this.courseForm.invalid) {
+    return this.courseForm.markAllAsTouched();
+  } else {
+    this.matDialogRef.close(this.courseForm.value);
   }
+}
 }

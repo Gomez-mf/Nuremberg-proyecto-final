@@ -1,23 +1,60 @@
 {
   "users": [
     {
+      "id": 1,
       "name": "Admin",
       "lastname": "user",
       "email": "admin@nuremberg.com",
       "password": "1234",
       "token": "sadkjkas",
-      "id": 1
-    }
-  ],
-  "courses": [],
-  "students": [
+      "role": "Admin"
+    },
     {
-      "id": 1,
       "name": "Malena",
       "lastname": "Areco",
       "email": "malenaareco@gmail.com",
-      "subjects": 10,
-      "age": 23
+      "id": 2,
+      "password": "Areco1234",
+      "token": "idfjiddk",
+      "role": "Student"
+    }
+  ],
+  "courses": [
+    {
+      "name": "Desarrollo web",
+      "duration": "15 semanas",
+      "description": "Aprende a construir tu propio sitio web en HTML desde cero. Domina el lenguaje nativo de Internet e ingresa al mundo del desarrollo web.",
+      "price": "$35000",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "name": "JavaScript",
+      "description": "Domina los fundamentos de la programación a través de uno de los lenguajes más utilizados del mercado. Aprende a generar desarrollos en entornos Web y Mobile.",
+      "duration": "10 semanas",
+      "price": "$40000"
+    },
+    {
+      "id": 3,
+      "name": "React JS",
+      "description": "Domina el Framework JavaScript más demandado en la industria para el desarrollo Front End. Aprende a construir un proyecto real desde cero utilizando las mejores prácticas del mercado laboral.",
+      "duration": "9 semanas",
+      " price": "$35000"
+    },
+    {
+      "id": 4,
+      "name": "Angular",
+      "description": "Aprende a crear una interfaz de usuario CRUD Maestro/Detalle con el framework para front-end más escalable y estructurado del mercado. Angular se caracteriza, sobre todo, por su arquitectura modular altamente escalable.",
+      "duration": "5 semanas",
+      "price": "$35000"
+    }
+  ],
+  "students": [
+    {
+      "name": "Malena",
+      "lastname": "Areco",
+      "email": "malenaareco@gmail.com",
+      "id": 1
     },
     {
       "id": 3,
@@ -34,12 +71,18 @@
       "email": "mezaEliana88@gmail.com",
       "subjects": 3,
       "age": 22
+    }
+  ],
+  "enrollments": [
+    {
+      "studentId": 4,
+      "courseId": 4,
+      "id": 3
     },
     {
-      "name": "Malena",
-      "lastname": "Areco",
-      "email": "arecomalena@gmail.com",
-      "id": 5
+      "studentId": 1,
+      "courseId": 2,
+      "id": 4
     }
   ]
 }

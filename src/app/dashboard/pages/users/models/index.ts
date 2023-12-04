@@ -5,4 +5,5 @@ export interface users{
     email: string;
     token: string;
     password: string;
+    role: 'Admin' | 'Student'
 }

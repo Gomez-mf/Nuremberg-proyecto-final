@@ -1,20 +1,30 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { users } from 'src/app/dashboard/pages/users/models';
 import { environment } from 'src/enviroments/enviroments.local';
 import { LoginPayload } from '../models';
 import { Router } from '@angular/router';
-import swal from'sweetalert2';
+import swal from 'sweetalert2';
+import { Store } from '@ngrx/store';
+import { authActions } from 'src/app/store/auth/auth.actions';
+import { selectAuthUser } from 'src/app/store/auth/auth.selectors';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private _authUser$ = new BehaviorSubject<users | null>(null);
+  public authUser$ = this.store.select(selectAuthUser);
 
-  public authUser$ = this._authUser$.asObservable();
-  constructor(private httpClient: HttpClient, private router: Router) {}
+  private handleAuthUser(authUser: users): void {
+    this.store.dispatch(authActions.setAuthUsers({ data: authUser }));
+    localStorage.setItem('token', authUser.token);
+  }
+  constructor(
+    private httpClient: HttpClient,
+    private router: Router,
+    private store: Store
+  ) {}
 
   login(paylod: LoginPayload): void {
     this.httpClient
@@ -24,13 +34,11 @@ export class AuthService {
       .subscribe({
         next: (r) => {
           if (!r.length) {
-            swal.fire('Usuario o contraseña inválidos')
+            swal.fire('Usuario o contraseña inválidos');
           } else {
             const authUser = r[0];
-            this._authUser$.next(authUser);
-            localStorage.setItem('token', authUser.token);
+            this.handleAuthUser(authUser);
             this.router.navigate(['/dashboard/home']);
-            console.log('ok');
           }
         },
         error: (err) => {
@@ -50,17 +58,29 @@ export class AuthService {
             return false;
           } else {
             const authUser = users[0];
-            this._authUser$.next(authUser);
-            localStorage.setItem('token', authUser.token);
+            this.handleAuthUser(authUser);
             return true;
           }
         })
       );
   }
 
-  logout(): void{
-    this._authUser$.next(null);
-    localStorage.removeItem('token');
-    this.router.navigate(['/auth/login']);
+  logout(): void {
+    swal
+    .fire({
+      title: '¿Está seguro que quierar cerrar sesión?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+    })
+    .then((result) => {
+      if (result.isConfirmed) {
+        this.store.dispatch(authActions.resetState());
+        localStorage.removeItem('token');
+        this.router.navigate(['/auth/login']);
+      }
+    });
   }
 }

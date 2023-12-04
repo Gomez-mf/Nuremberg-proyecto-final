@@ -1,1 +1,17 @@
-<p>users works!</p>
+<div class="container text-center">
+    <h2 appTitle class="text-center">Usuarios</h2>
+    <app-users-table
+    [dataSource]="(users$ | async) || []"
+    (editUser)="onEditUser($event)"
+    (deleteUser)="onDeleteUser($event)"></app-users-table>
+  <router-outlet></router-outlet>
+    <button
+      class="mt-4"
+      (click)="addUser()"
+      mat-raised-button
+      color="accent"
+    >
+      Agregar alumno
+    </button>
+   
+  </div>

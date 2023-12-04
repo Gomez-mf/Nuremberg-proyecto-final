@@ -1,5 +1,8 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/auth/services/auth.service';
+import { Observable } from 'rxjs';
+import { users } from '../../pages/users/models';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-toolbar',
@@ -10,9 +13,16 @@ export class ToolbarComponent {
   @Output ()
   toggleSidenav = new EventEmitter();
 
-  constructor(private auuthService: AuthService){}
+  public authUser$: Observable<users | null>
+  
+  constructor(private authService: AuthService, public dialog: MatDialog,){
+
+    this.authUser$ = this.authService.authUser$
+
+  }
 
   logout(): void{
-    this.auuthService.logout();
+    this.authService.logout();
   }
+
 }

@@ -13,6 +13,7 @@
     (click)="addStudent()"
     mat-raised-button
     color="accent"
+    *ngIf="(userRole$ | async) !== 'Student'"
   >
     Agregar alumno
   </button>

@@ -1,4 +1,49 @@
-<div class="container">
-  <router-outlet>
-  </router-outlet>
+<div class="d-flex justify-content-center row">
+  <h1 class="text-center mt-4">Nuremberg. Cursos online</h1>
+  <mat-card class="example-card mx-5">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Estudiantes</mat-card-title>
+      <mat-card-subtitle
+        >La mejor educación online a tu alcance</mat-card-subtitle
+      >
+    </mat-card-header>
+    <img
+      mat-card-image
+      src="https://i0.wp.com/imgs.hipertextual.com/wp-content/uploads/2014/09/estudiantes-clase1024.jpg?fit=1024%2C682&quality=50&strip=all&ssl=1"
+      alt="Photo of a Shiba Inu"
+    />
+    <mat-card-content>
+      <p>
+        Inscribite a clases prácticas con mentorías personalizadas dictadas por
+        quienes más saben, y preparate para dar el siguiente paso en tu carrera
+        profesional.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button class="text-center" mat-button routerLink="/dashboard/courses">Ver cursos</button>
+    </mat-card-actions>
+  </mat-card>
+  <mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>Profesores</mat-card-title>
+      <mat-card-subtitle
+        >La mejor educación online a tu alcance</mat-card-subtitle
+      >
+    </mat-card-header>
+    <img
+      mat-card-image
+      src="https://programacion.net/files/article/article_03253_.jpg"
+      alt="Photo of a Shiba Inu"
+    />
+    <mat-card-content>
+      <p>
+        Aprendé interactuando con líderes de gran trayectoria en las empresas de tecnología más innovadoras a nivel global.
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+    </mat-card-actions>
+  </mat-card>
+  <router-outlet> </router-outlet>
 </div>

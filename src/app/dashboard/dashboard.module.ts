@@ -19,6 +19,9 @@ import { CoursesTableComponent } from './pages/courses/components/courses-table/
 import { CoursesComponent } from './pages/courses/courses.component';
 import { CoursesDialogComponent } from './pages/courses/components/courses-dialog/courses-dialog.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { UsersComponent } from './pages/users/users.component';
+import { usersTableComponent } from './pages/users/components/users-table/users-table.component';
+import { usersDialogComponent } from './pages/users/components/users-dialog/users-dialog.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,10 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     StudentsTableComponent,
     CoursesComponent,
     CoursesTableComponent,
-    CoursesDialogComponent
+    CoursesDialogComponent,
+    UsersComponent,
+    usersTableComponent,
+    usersDialogComponent
 
   ],
   imports: [

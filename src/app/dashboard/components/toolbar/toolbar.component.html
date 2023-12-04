@@ -9,5 +9,6 @@
   </button>
   <span>Nuremberg</span>
   <span class="example-spacer"></span>
-  <button (click)="logout()" mat-raised-button color="accent">Cerrar Sesion</button>
+  <a>Hola {{(authUser$ | async)?.name}}</a>
+  <mat-icon (click)="logout()">logout</mat-icon>
 </mat-toolbar>

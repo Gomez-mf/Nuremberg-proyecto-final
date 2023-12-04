@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/auth/services/auth.service';
-import { users } from '../../pages/users/models';
+import { Store } from '@ngrx/store';
+import { Observable, map } from 'rxjs';
+import { selectAuthUser } from 'src/app/store/auth/auth.selectors';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -9,9 +10,12 @@ import { users } from '../../pages/users/models';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-  public authUser$: Observable<users | null>
-  
-  constructor(private authService: AuthService){
-    this.authUser$ = this.authService.authUser$
+  userRole$: Observable<'Admin' | 'Student' | undefined>
+
+
+  constructor(private store: Store){
+    this.userRole$ = this.store.select(selectAuthUser).pipe(map((u)=>u?.role))
   }
+ 
+  
 }
